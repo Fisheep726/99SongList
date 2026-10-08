@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'v1.2.1'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
+  var VERSION = 'v1.2.2'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
 
   // 歌单数据来自 songs.js 里的 window.SONGS
   var songs = Array.isArray(window.SONGS) ? window.SONGS : [];
@@ -28,16 +28,13 @@
     var sa = String(a || '').trim();
     var sb = String(b || '').trim();
 
-    // 先按拼音首字母分组（英文歌按首字母、数字归到 #），再在组内用 zh 排序器精排。
-    // 这样英文歌会插到对应的字母分组里，而不是被 zh 排序器统一排到中文之后。
-    var ia = window.getInitial(sa);
-    var ib = window.getInitial(sb);
-    if (ia !== ib) {
-      if (ia === '#') return 1;
-      if (ib === '#') return -1;
-      return ia < ib ? -1 : 1;
-    }
+    // 先用排序键比较：中文取首字拼音、英文取小写字母，两者放在同一个序列里，
+    // 所以英文歌会插进拼音顺序里正确的位置，而不是被 zh 排序器统一排到中文之前。
+    var ka = window.getSortKey(sa);
+    var kb = window.getSortKey(sb);
+    if (ka !== kb) return ka < kb ? -1 : 1;
 
+    // 首字拼音相同时（如「没」和「美」都是 mei），再用 zh 排序器按完整拼音精排。
     return collator ? collator.compare(sa, sb) : sa.localeCompare(sb, 'zh');
   }
 
