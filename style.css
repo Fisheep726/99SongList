@@ -182,6 +182,7 @@ main {
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 14px 16px;
+  scroll-margin-top: 150px;
   transition: border-color 0.15s ease, transform 0.15s ease;
 }
 .song:hover {
@@ -315,6 +316,37 @@ main {
   margin-top: 8px;
 }
 
+/* ---------- 右侧 A-Z 索引 ---------- */
+.index-bar {
+  position: fixed;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  z-index: 40;
+  background: rgba(23, 26, 34, 0.85);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 6px 2px;
+}
+
+.index-item {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1.5;
+  width: 20px;
+  text-align: center;
+  cursor: pointer;
+  padding: 1px 0;
+  border-radius: 4px;
+}
+.index-item:hover:not(.is-empty) { color: var(--accent); }
+.index-item.is-empty { opacity: 0.25; cursor: default; }
+
 /* ---------- 版本号 ---------- */
 .version {
   position: fixed;
@@ -337,4 +369,7 @@ main {
   .controls { flex-direction: column; align-items: stretch; }
   .search { flex: none; width: 100%; }
   .btn-primary { width: 100%; }
+  main { padding-right: 44px; }
+  .song { scroll-margin-top: 230px; }
+  .index-item { font-size: 10px; width: 16px; }
 }

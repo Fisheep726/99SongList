@@ -2,7 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'mySongList.local';
-  var VERSION = 'v1.0.0'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
+  var VERSION = 'v1.1.0'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
 
   // 歌单数据来自 songs.js 里的 window.SONGS
   var baseSongs = Array.isArray(window.SONGS) ? window.SONGS : [];
@@ -20,7 +20,8 @@
     saveBtn: document.getElementById('saveBtn'),
     newName: document.getElementById('newName'),
     newArtist: document.getElementById('newArtist'),
-    version: document.getElementById('version')
+    version: document.getElementById('version'),
+    indexBar: document.getElementById('indexBar')
   };
 
   // ---- 本地添加的歌曲（存在浏览器 localStorage）----
@@ -69,6 +70,46 @@
     return els.sort.value;
   }
 
+  var currentSongs = [];
+
+  // ---- 右侧 A-Z 快速索引 ----
+  function buildIndex() {
+    if (!els.indexBar) return;
+    els.indexBar.innerHTML = '';
+    'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('').forEach(function (letter) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.textContent = letter;
+      btn.className = 'index-item';
+      btn.dataset.letter = letter;
+      btn.addEventListener('click', function () { jumpTo(letter); });
+      els.indexBar.appendChild(btn);
+    });
+  }
+
+  function updateIndex() {
+    if (!els.indexBar) return;
+    var present = {};
+    currentSongs.forEach(function (s) {
+      present[window.getInitial(s.name)] = true;
+    });
+    Array.prototype.forEach.call(els.indexBar.children, function (btn) {
+      var has = !!present[btn.dataset.letter];
+      btn.disabled = !has;
+      btn.classList.toggle('is-empty', !has);
+    });
+  }
+
+  function jumpTo(letter) {
+    var idx = -1;
+    for (var i = 0; i < currentSongs.length; i++) {
+      if (window.getInitial(currentSongs[i].name) === letter) { idx = i; break; }
+    }
+    if (idx === -1) return;
+    var item = els.list.children[idx];
+    if (item) item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+
   // ---- 渲染 ----
   function render() {
     var query = getQuery();
@@ -91,6 +132,8 @@
       });
     }
 
+    currentSongs = songs;
+
     els.list.innerHTML = '';
     songs.forEach(function (s) {
       els.list.appendChild(buildItem(s));
@@ -102,6 +145,8 @@
     var localCount = localSongs.length;
     els.localCount.hidden = localCount === 0;
     els.localCount.textContent = '（含本地添加 ' + localCount + ' 首）';
+
+    updateIndex();
   }
 
   function buildItem(s) {
@@ -203,6 +248,9 @@
 
   // 显示版本号
   if (els.version) els.version.textContent = VERSION;
+
+  // 构建 A-Z 索引
+  buildIndex();
 
   // 首次渲染
   render();
