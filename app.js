@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'v1.2.0'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
+  var VERSION = 'v1.2.1'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
 
   // 歌单数据来自 songs.js 里的 window.SONGS
   var songs = Array.isArray(window.SONGS) ? window.SONGS : [];
@@ -25,7 +25,20 @@
   }
 
   function compare(a, b) {
-    return collator ? collator.compare(a, b) : String(a).localeCompare(String(b), 'zh');
+    var sa = String(a || '').trim();
+    var sb = String(b || '').trim();
+
+    // 先按拼音首字母分组（英文歌按首字母、数字归到 #），再在组内用 zh 排序器精排。
+    // 这样英文歌会插到对应的字母分组里，而不是被 zh 排序器统一排到中文之后。
+    var ia = window.getInitial(sa);
+    var ib = window.getInitial(sb);
+    if (ia !== ib) {
+      if (ia === '#') return 1;
+      if (ib === '#') return -1;
+      return ia < ib ? -1 : 1;
+    }
+
+    return collator ? collator.compare(sa, sb) : sa.localeCompare(sb, 'zh');
   }
 
   function getQuery() {
