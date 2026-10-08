@@ -1,14 +1,12 @@
 :root {
   --bg: #0f1117;
   --surface: #171a22;
-  --surface-2: #1f2330;
   --border: #2a2f3d;
   --text: #e8eaf0;
   --muted: #8b91a3;
   --accent: #ff5f9e;
   --accent-2: #7b5cff;
   --radius: 12px;
-  --shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 * { box-sizing: border-box; }
@@ -124,31 +122,6 @@ select {
   cursor: pointer;
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-  border: none;
-  border-radius: var(--radius);
-  padding: 11px 18px;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: transform 0.06s ease, opacity 0.2s ease;
-}
-.btn-primary:hover { opacity: 0.92; }
-.btn-primary:active { transform: scale(0.97); }
-
-.btn-ghost {
-  background: transparent;
-  color: var(--muted);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 10px 16px;
-  font-size: 14px;
-  cursor: pointer;
-}
-.btn-ghost:hover { color: var(--text); }
-
 /* ---------- 主体 ---------- */
 main {
   flex: 1;
@@ -163,7 +136,6 @@ main {
   color: var(--muted);
   margin-bottom: 12px;
 }
-.stats .muted { margin-left: 8px; }
 
 .song-list {
   list-style: none;
@@ -216,27 +188,6 @@ main {
 
 .song-artist:empty { display: none; }
 
-.badge {
-  flex-shrink: 0;
-  font-size: 11px;
-  color: var(--accent);
-  border: 1px solid var(--accent);
-  border-radius: 20px;
-  padding: 2px 8px;
-}
-
-.del {
-  flex-shrink: 0;
-  background: transparent;
-  color: var(--muted);
-  border: none;
-  font-size: 15px;
-  cursor: pointer;
-  padding: 4px 6px;
-  border-radius: 6px;
-}
-.del:hover { color: #ff6b6b; background: rgba(255, 107, 107, 0.1); }
-
 .empty {
   text-align: center;
   color: var(--muted);
@@ -250,70 +201,6 @@ main {
   font-size: 13px;
   padding: 16px;
   border-top: 1px solid var(--border);
-}
-
-/* ---------- 弹窗 ---------- */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  z-index: 100;
-}
-
-.modal-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 24px;
-  width: 100%;
-  max-width: 400px;
-  box-shadow: var(--shadow);
-}
-
-.modal-card h2 { margin: 0 0 8px; font-size: 20px; }
-
-.hint {
-  color: var(--muted);
-  font-size: 13px;
-  margin: 0 0 16px;
-}
-.hint code {
-  background: var(--surface-2);
-  padding: 1px 6px;
-  border-radius: 5px;
-  color: var(--accent);
-}
-
-.field {
-  display: block;
-  margin-bottom: 14px;
-  font-size: 14px;
-  color: var(--muted);
-}
-.field span { display: block; margin-bottom: 6px; }
-.required { color: var(--accent); }
-
-.field input {
-  width: 100%;
-  background: var(--surface-2);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  padding: 10px 12px;
-  font-size: 15px;
-  outline: none;
-}
-.field input:focus { border-color: var(--accent-2); }
-
-.modal-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 8px;
 }
 
 /* ---------- 右侧 A-Z 索引 ---------- */
@@ -368,7 +255,6 @@ main {
   .brand h1 { font-size: 22px; }
   .controls { flex-direction: column; align-items: stretch; }
   .search { flex: none; width: 100%; }
-  .btn-primary { width: 100%; }
   main { padding-right: 44px; }
   .song { scroll-margin-top: 230px; }
   .index-item { font-size: 10px; width: 16px; }

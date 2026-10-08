@@ -31,7 +31,6 @@
           <option value="name">按歌名排序</option>
           <option value="artist">按歌手排序</option>
         </select>
-        <button id="addBtn" class="btn-primary" type="button">＋ 添加歌曲</button>
       </div>
     </div>
   </header>
@@ -39,7 +38,6 @@
   <main>
     <div class="stats">
       <span id="count">共 0 首</span>
-      <span id="localCount" class="muted" hidden></span>
     </div>
     <ul id="list" class="song-list"></ul>
     <p id="empty" class="empty" hidden>没有找到匹配的歌曲，换个关键词试试～</p>
@@ -48,26 +46,6 @@
   <footer class="footer">
     <p>点歌方式：在直播间报「歌名 + 歌手」即可</p>
   </footer>
-
-  <!-- 本地添加歌曲弹窗 -->
-  <div id="modal" class="modal" hidden>
-    <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <h2 id="modalTitle">添加歌曲</h2>
-      <p class="hint">此处的歌曲只保存在<b>当前浏览器 / 本设备</b>，粉丝看不到，换设备或清缓存会丢失。<br>想要长期更新并同步给粉丝，请编辑 <code>songs.js</code> 文件。</p>
-      <label class="field">
-        <span>歌曲名 <b class="required">*</b></span>
-        <input id="newName" type="text" placeholder="例如：晴天">
-      </label>
-      <label class="field">
-        <span>歌手 / 原唱</span>
-        <input id="newArtist" type="text" placeholder="例如：周杰伦">
-      </label>
-      <div class="modal-actions">
-        <button id="cancelBtn" class="btn-ghost" type="button">取消</button>
-        <button id="saveBtn" class="btn-primary" type="button">保存</button>
-      </div>
-    </div>
-  </div>
 
   <div id="indexBar" class="index-bar" aria-label="按拼音首字母快速跳转"></div>
   <div id="version" class="version" title="页面版本号"></div>
