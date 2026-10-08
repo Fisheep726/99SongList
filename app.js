@@ -2,6 +2,7 @@
   'use strict';
 
   var STORAGE_KEY = 'mySongList.local';
+  var VERSION = 'v1.0.0'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
 
   // 歌单数据来自 songs.js 里的 window.SONGS
   var baseSongs = Array.isArray(window.SONGS) ? window.SONGS : [];
@@ -18,7 +19,8 @@
     cancelBtn: document.getElementById('cancelBtn'),
     saveBtn: document.getElementById('saveBtn'),
     newName: document.getElementById('newName'),
-    newArtist: document.getElementById('newArtist')
+    newArtist: document.getElementById('newArtist'),
+    version: document.getElementById('version')
   };
 
   // ---- 本地添加的歌曲（存在浏览器 localStorage）----
@@ -198,6 +200,9 @@
   els.newArtist.addEventListener('keydown', function (e) {
     if (e.key === 'Enter') saveNew();
   });
+
+  // 显示版本号
+  if (els.version) els.version.textContent = VERSION;
 
   // 首次渲染
   render();
