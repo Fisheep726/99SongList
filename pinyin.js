@@ -69,7 +69,7 @@ window.PINYI = {
   '卫': 'wei', '微': 'wei', '温': 'wen', '我': 'wo', '五': 'wu', '伍': 'wu',
   '勿': 'wu',
   // X
-  '夏': 'xia', '先': 'xian', '像': 'xiang', '想': 'xiang', '嚣': 'xiao', '小': 'xiao',
+  '夏': 'xia', '先': 'xian', '弦': 'xian', '像': 'xiang', '想': 'xiang', '嚣': 'xiao', '小': 'xiao',
   '笑': 'xiao', '萧': 'xiao', '信': 'xin', '心': 'xin', '徐': 'xu', '许': 'xu',
   '薛': 'xue', '寻': 'xun',
   // Y

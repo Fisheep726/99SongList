@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  var VERSION = 'v1.2.2'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
+  var VERSION = 'v1.2.3'; // 页面版本号：每次改动后 +1，方便确认部署是否生效
 
   // 歌单数据来自 songs.js 里的 window.SONGS
   var songs = Array.isArray(window.SONGS) ? window.SONGS : [];
